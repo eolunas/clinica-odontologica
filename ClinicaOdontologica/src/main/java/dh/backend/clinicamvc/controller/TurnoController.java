@@ -2,6 +2,8 @@ package dh.backend.clinicamvc.controller;
 
 import dh.backend.clinicamvc.Dto.request.TurnoRequestDto;
 import dh.backend.clinicamvc.Dto.response.TurnoResponseDto;
+import dh.backend.clinicamvc.exception.BadRequestException;
+import dh.backend.clinicamvc.exception.ResourceNotFoundException;
 import dh.backend.clinicamvc.service.ITurnoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class TurnoController {
     }
 
     @PostMapping
-    public ResponseEntity<TurnoResponseDto> agregarTurno(@RequestBody TurnoRequestDto turno){
+    public ResponseEntity<TurnoResponseDto> agregarTurno(@RequestBody TurnoRequestDto turno) throws BadRequestException {
         TurnoResponseDto turnoADevolver = turnoService.registrar(turno);
         if(turnoADevolver==null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -33,10 +35,17 @@ public class TurnoController {
     public ResponseEntity<List<TurnoResponseDto>> buscarTodosTurnos(){
         return ResponseEntity.ok(turnoService.buscarTodos());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarTurno(@PathVariable Integer id) throws ResourceNotFoundException {
+        turnoService.eliminarTurno(id);
+        return ResponseEntity.ok("{\"message\": \"turno eliminado\"}");
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<String> modificarTurno(@PathVariable Integer id, @RequestBody TurnoRequestDto turno){
         turnoService.actualizarTurno(id, turno);
-        return ResponseEntity.ok("Turno modificado");
+        return ResponseEntity.ok("{\"message\": \"turno modificado\"}");
     }
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

@@ -7,6 +7,8 @@ import dh.backend.clinicamvc.Dto.response.TurnoResponseDto;
 import dh.backend.clinicamvc.entity.Odontologo;
 import dh.backend.clinicamvc.entity.Paciente;
 import dh.backend.clinicamvc.entity.Turno;
+import dh.backend.clinicamvc.exception.BadRequestException;
+import dh.backend.clinicamvc.exception.ResourceNotFoundException;
 import dh.backend.clinicamvc.repository.IOdontologoRepository;
 import dh.backend.clinicamvc.repository.IPacienteRepository;
 import dh.backend.clinicamvc.repository.ITurnoRepository;
@@ -34,9 +36,11 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public TurnoResponseDto registrar(TurnoRequestDto turnoRequestDto) {
+    public TurnoResponseDto registrar(TurnoRequestDto turnoRequestDto) throws BadRequestException {
         Optional<Paciente> paciente = pacienteRepository.findById(turnoRequestDto.getPaciente_id());
+        if(paciente.isEmpty()) throw new BadRequestException("{\"message\": \"paciente no encontrado\"}");
         Optional<Odontologo> odontologo = odontologoRepository.findById(turnoRequestDto.getOdontologo_id());
+        if(odontologo.isEmpty()) throw new BadRequestException("{\"message\": \"odontologo no encontrado\"}");
         Turno turnoARegistrar = new Turno();
         Turno turnoGuardado = null;
         TurnoResponseDto turnoADevolver = null;
@@ -90,8 +94,10 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public void eliminarTurno(Integer id) {
-        turnoRepository.deleteById(id);
+    public void eliminarTurno(Integer id) throws ResourceNotFoundException {
+        TurnoResponseDto turnoResponseDto = buscarPorId(id);
+        if(turnoResponseDto != null) turnoRepository.deleteById(id);
+        else throw new ResourceNotFoundException("{\"message\": \"turno no encontrado\"}");
     }
 
     @Override

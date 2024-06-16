@@ -1,7 +1,7 @@
 package dh.backend.clinicamvc.exception;
 
-public class ResourceNotFoundException extends Exception{
-    public ResourceNotFoundException(String message) {
+public class BadRequestException extends Exception{
+    public BadRequestException(String message) {
         super(message);
     }
 }

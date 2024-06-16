@@ -12,4 +12,9 @@ public class GlobalException {
     public ResponseEntity<String> recursoNoEncontrado(ResourceNotFoundException e){
         return ResponseEntity.status(HttpStatusCode.valueOf(404)).body(e.getMessage());
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<String> recursoNoEncontrado(BadRequestException e){
+        return ResponseEntity.status(HttpStatusCode.valueOf(400)).body(e.getMessage());
+    }
 }
