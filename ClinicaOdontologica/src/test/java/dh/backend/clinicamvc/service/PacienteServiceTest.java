@@ -31,15 +31,15 @@ class PacienteServiceTest {
     @BeforeEach
     void setUp(){
         paciente = new Paciente();
-        paciente.setNombre("Menganito");
-        paciente.setApellido("Cosme");
-        paciente.setDni("464646");
-        paciente.setFechaIngreso(LocalDate.of(2024,01,12));
+        paciente.setNombre("Bart");
+        paciente.setApellido("Simpson");
+        paciente.setDni("12345678");
+        paciente.setFechaIngreso(LocalDate.of(2023,12,25));
         Domicilio domicilio = new Domicilio();
-        domicilio.setCalle("Calle falsa");
+        domicilio.setCalle("5th Avenue");
         domicilio.setNumero(123);
-        domicilio.setLocalidad("San Pedro");
-        domicilio.setProvincia("Jujuy");
+        domicilio.setLocalidad("Usaquen");
+        domicilio.setProvincia("Cundinamarca");
         paciente.setDomicilio(domicilio);
     }
 
@@ -47,9 +47,9 @@ class PacienteServiceTest {
     @Test
     @DisplayName("Testear que un paciente fue guardado")
     void testPacienteGuardado(){
-        Paciente pacienteDesdeLaBD = pacienteService.registrarPaciente(paciente);
+        Paciente pacienteEnBD = pacienteService.registrarPaciente(paciente);
 
-        assertNotNull(pacienteDesdeLaBD);
+        assertNotNull(pacienteEnBD);
     }
 
     @Test

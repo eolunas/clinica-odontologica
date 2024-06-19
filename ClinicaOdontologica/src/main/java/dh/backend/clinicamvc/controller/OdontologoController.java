@@ -35,7 +35,7 @@ public class OdontologoController {
     }
 
     @PutMapping
-    public ResponseEntity<String> modificarOdontologo(@RequestBody Odontologo odontologo){
+    public ResponseEntity<String> modificarOdontologo(@org.jetbrains.annotations.NotNull @RequestBody Odontologo odontologo){
         Optional<Odontologo> odontologoOptional = odontologoService.buscarUnOdontologo(odontologo.getId());
         if(odontologoOptional.isPresent()){
             odontologoService.modificarOdontologo(odontologo);
