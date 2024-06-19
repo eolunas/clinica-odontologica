@@ -30,10 +30,24 @@ function fetchOdontologos() {
     .catch((error) => {
       console.error("Error fetching data:", error);
     });
+}
+
 
   // modificar un odontologo
 
   // eliminar un odontologo
-}
+  function deleteOdontologo(id) {
+    console.log('Ejecutado delete')
+    fetch(`/odontologo/${id}`, {
+      method: 'delete'
+    })
+    .then((response) => response.json())
+    .then(data => {
+        console.log(data)
+        alert('Eliminado exitosamente');
+        fetchOdontologos();
+    }
+    )
+  }
 
 fetchOdontologos();
