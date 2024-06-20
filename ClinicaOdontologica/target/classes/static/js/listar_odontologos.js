@@ -46,7 +46,9 @@ function fetchOdontologos() {
 
   odontologoForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    this.hide();
+    // Instanciar el modal con Bootstrap
+    var modalInstance = new bootstrap.Modal(odontologoForm);
+    modalInstance.hide();
   })
 
   cancelOdontologo.addEventListener('click', (e) => {
