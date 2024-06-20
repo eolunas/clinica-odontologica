@@ -76,6 +76,41 @@
         </thead>
         <tbody></tbody>
       </table>
+      <!-- Modal modificar -->
+      <form class="modal fade" 
+            id="staticBackdrop" 
+            data-bs-backdrop="static" 
+            data-bs-keyboard="false" 
+            tabindex="-1" 
+            aria-labelledby="staticBackdropLabel" 
+            aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Modificar</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" required />
+                </div>
+                <div class="mb-3">
+                  <label for="apellido" class="form-label">Apellido</label>
+                  <input type="text" class="form-control" id="apellido" required />
+                </div>
+                <div class="mb-3">
+                  <label for="matricula" class="form-label">Matrícula</label>
+                  <input type="text" class="form-control" id="matricula" required />
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="cancel-odontologo" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
     <script src="js/listar_odontologos.js"></script>
   </body>
