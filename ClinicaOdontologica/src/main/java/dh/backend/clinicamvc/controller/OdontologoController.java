@@ -60,7 +60,7 @@ public class OdontologoController {
         Optional<Odontologo> odontologo = odontologoService.buscarUnOdontologo(id);
         if(odontologo.isPresent()){
             odontologoService.eliminarOdontologo(id);
-            LOGGER.info("Odontologo eliminado con exito")
+            LOGGER.info("Odontologo eliminado con exito");
             return ResponseEntity.ok("{\"message\": \"odontologo eliminado\"}");
         } else {
             LOGGER.info("No fue posible eliminar ningun odontologo.");
